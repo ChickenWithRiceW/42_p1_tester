@@ -64,7 +64,7 @@ def testing_func(test_cases: tuple[dict]) -> list:
             except Exception as e:
                 results.append(e)
             finally:
-                if results[-1] == expect or (should_raise and type(results[-1]) is Exception):
+                if results[-1] == expect or (should_raise and isinstance(results[-1], Exception)):
                     full_res.append(True)
                     print(f"| {SUCCES} ", end='')
                 else:
@@ -130,8 +130,8 @@ def numericProcesor_tests_0() -> None:
         {
             "func": num_proc2.output,
             "tests": (((),) * 4),
-            "expected": "[Costum error message]",
-            "should_raise": True,
+            "expected": ((-1, "No data available"),),
+            "should_raise": False,
             "message": "Calling output on empty data: ",
             "testing_message": "Trying to get output"
         }
@@ -192,8 +192,8 @@ def textProcesor_tests_0() -> None:
         {
             "func": text_proc2.output,
             "tests": (((),) * 4),
-            "expected": "[Costum error message]",
-            "should_raise": True,
+            "expected": ((-1, "No data available"),),
+            "should_raise": False,
             "message": "Calling output on empty data: ",
             "testing_message": "Trying to get output"
         }
@@ -273,15 +273,14 @@ def logProcesor_tests_0() -> None:
         {
             "func": log_proc2.output,
             "tests": (((),) * 4),
-            "expected": "[Costum error message]",
-            "should_raise": True,
+            "expected": ((-1, "No data available"),),
+            "should_raise": False,
             "message": "Calling output on empty data: ",
             "testing_message": "Trying to get output"
         }
     )
     res = testing_func(text_tests)
     return res
-
 
 
 def normal_tests() -> None:
@@ -303,7 +302,8 @@ def normal_tests() -> None:
     print()
     print(f"Got {score}/{len(trys)}")
 
+
 if __name__ == "__main__":
     main()
 
-
+# ! Add the key check
